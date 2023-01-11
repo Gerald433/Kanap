@@ -89,5 +89,3 @@ article.appendChild(paragraphe)
 
 
 
-
-console.log (linkTo)
