@@ -61,22 +61,6 @@ fetch("http://localhost:3000/api/products/" + kanapId)
             const selColor = document.getElementById("colors")
             const inpQuant = document.getElementById("quantity")
 
-
-
-            // 2 Erreurs possibles à traiter: 
-
-            // 1er - Si Couleur non renseignée
-            if (selColor.value === "") {
-                alert("Veuillez renseigner la couleur")
-            }
-
-
-            // 2eme -  Si Quantité non renseignée (traduction de string en number avec parseInt)
-            if (parseInt(inpQuant.value) <= 0) {
-                alert("Veuillez renseigner la quantité")
-            }
-
-
             // Objet contenant les éléments à passer au local storage
             const produit = {
                 id: kanapId,
@@ -84,22 +68,50 @@ fetch("http://localhost:3000/api/products/" + kanapId)
                 quantity: Number(inpQuant.value)
             }
 
+
+
+
+            // 2 Erreurs possibles à traiter: 
+
+            // 1er - Si Couleur non renseignée
+            if (selColor.value === "") {
+                alert("Veuillez renseigner la couleur")
+                return
+            }
+
+
+            // 2eme -  Si Quantité non renseignée (traduction de string en number avec parseInt)
+            if (parseInt(inpQuant.value) <= 0) {
+                alert("Veuillez renseigner la quantité")
+                return
+            }
+
+            // Exigence de quantité
+            if (produit.quantity < 1 || produit.quantity > 100) {
+                alert("Veuillez sélectionner une quantité comprise entre 1 et 100.")
+                return
+            }
+
+
+
+
             // la valeur sera push dans basket
-           
+
             let productFound
             for (let i = 0; i < basket.length; i++) {
-               if(basket[i].id === produit.id && basket[i].color === produit.color ){
-                productFound = basket[i]
-               }
-                
+                if (basket[i].id === produit.id && basket[i].color === produit.color) {
+                    productFound = basket[i]
+                }
+
             }
-            if(productFound === undefined){
+            if (productFound === undefined) {
                 basket.push(produit)
-            }else{
-                productFound.quantity += produit.quantity 
+            } else {
+                productFound.quantity += produit.quantity
             }
 
             localStorage.setItem("basket", JSON.stringify(basket))
+
 
 
 
