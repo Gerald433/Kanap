@@ -6,38 +6,6 @@ let canapes = await REPONSE.json()
 
 console.log(canapes)
 
-/* résultat du console Log = Affiche 1 tableau composé de 8 objets:
-
-Décomposition type d'un objet:
-
-0: 
-altTxt:"Photo d'un canapé bleu, deux places"
-colors: (3) ['Blue', 'White', 'Black']
-description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-imageUrl: "http://localhost:3000/images/kanap01.jpeg"
-name: "Kanap Sinopé"
-price: 1849
-_id: "107fb5b75607497b96722bda5b504926"
-*/
-
-
-
-
-
-/*HTML    A créer:
-
-<a href="./product.html?id=42">
-            <article>
-              <img src=".../product01.jpg" alt="Lorem ipsum dolor sit amet, Kanap name1">
-              <h3 class="productName">Kanap name1</h3>
-              <p class="productDescription">Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu.</p>
-            </article>
-          </a> -->
-
-
-
-*/
-
 
 
 
