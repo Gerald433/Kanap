@@ -1,4 +1,10 @@
 
+
+
+
+
+
+
 //-------------------------------------------------
 // init
 //-------------------------------------------------
@@ -236,113 +242,133 @@ function findIndexOfCanape(articleCartItem) {
 // vérification de renseignements formulaire
 //-------------------------------------------------
 
-// Prénom
 let firstName = document.getElementById("firstName")
+let lastName = document.getElementById("lastName")
+let address = document.getElementById("address")
+let city = document.getElementById("city")
+let email = document.getElementById("email")
+// flag
+let firstNameHasError = false
+let lastNameHasError = false
+let addressHasError = false
+let cityHasError = false
+let emailHasError = false
 
-firstName.addEventListener("input", function () {
+
+// dupliquer par elements
+/*Mise à jour du flag ci-dessus   
+Affichage d'erreurs dans html*/
+
+
+function checkFirstName() {
+  let errorMessageFirstName = document.getElementById("firstNameErrorMsg")
+  // utiliser ds 2 endroit au click sur order et au changement valeur input
   let regexFirstName = /^[a-zàâäéèêëïîôöùûüÿç-]{1,15}$/i
   let resultControlFirstName = regexFirstName.test(firstName.value)
-  let errorMessage = document.getElementById("firstNameErrorMsg")
-  if (resultControlFirstName === false) {
-    errorMessage.textContent = "Ce champ n'accepte que les caractères alphabétiques dans la limite de 1 à 15"
-    return
+  firstNameHasError = resultControlFirstName
+  if (firstName.value.length > 15) {
+    errorMessageFirstName.textContent = "Votre prénom contient trop de caractères"
+
+  } else if (firstName.value.length < 1) {
+    errorMessageFirstName.textContent = "Votre prénom n'est pas renseigné"
+
+  } else if (resultControlFirstName === false) {
+    errorMessageFirstName.textContent = "Ce champ n'accepte que les caractères alphabétiques dans la limite de 1 à 15"
+
+
   } else {
-    errorMessage.textContent = ""
-    return
+    errorMessageFirstName.textContent = ""
+
   }
-})
 
-// nom
-let lastName = document.getElementById("lastName")
+}
 
-lastName.addEventListener("input", function () {
+function checkLastName() {
+  let errorMessageLastName = document.getElementById("lastNameErrorMsg")
   let regexLastName = /^[a-zàâäéèêëïîôöùûüÿç-]{1,15}$/i
   let resultControlLastName = regexLastName.test(lastName.value)
-  let errorMessage = document.getElementById("lastNameErrorMsg")
-  if (resultControlLastName === false) {
-    errorMessage.textContent = "Ce champ n'accepte que les caractères alphabétiques dans la limite de 1 à 15"
-    return
+  lastNameHasError = resultControlLastName
+  if (lastName.value.length > 15) {
+    errorMessageLastName.textContent = "Votre nom contient trop de caractères"
+  } else if (lastName.value.length < 1) {
+    errorMessageLastName.textContent = "Votre nom n'est pas renseigné"
+  } else if (resultControlLastName === false) {
+    errorMessageLastName.textContent = "Ce champ n'accepte que les caractères alphabétiques dans la limite de 1 à 15"
+
   } else {
-    errorMessage.textContent = ""
-    return
+    errorMessageLastName.textContent = ""
+
   }
-})
+}
 
-
-// adress
-let address = document.getElementById("address")
-
-address.addEventListener("input", function () {
+function checkAddress() {
+  let errorMessageAddress = document.getElementById("addressErrorMsg")
   let regexAddress = /^[a-z0-9-\sàâäéèêëïîôöùûüÿç]{1,50}$/i
   let resultControlAddress = regexAddress.test(address.value)
-  let errorMessage = document.getElementById("addressErrorMsg")
-  if (resultControlAddress === false) {
-    errorMessage.textContent = "Ce champ n'accepte que les caractères alphanumériques dans la limite de 1 à 50"
-    return
+  addressHasError = resultControlAddress
+  if (address.value.length > 50) {
+    resultControlAddress = "Votre adresse contient trop de caractères"
+  } else if (address.value.length < 1) {
+    resultControlAddress = "Votre adresse n'est pas renseignée"
+  } else if (resultControlAddress === false) {
+    errorMessageAddress.textContent = "Ce champ n'accepte que les caractères alphanumériques dans la limite de 1 à 50"
   } else {
-    errorMessage.textContent = ""
-    return
+    errorMessageAddress.textContent = ""
+
   }
-})
+}
 
-
-// city
-let city = document.getElementById("city")
-
-city.addEventListener("input", function () {
+function checkCity() {
+  let errorMessageCity = document.getElementById("cityErrorMsg")
   let regexCity = /^[a-z\sàâäéèêëïîôöùûüÿç-]{1,40}$/i
   let resultControlCity = regexCity.test(city.value)
-  let errorMessage = document.getElementById("cityErrorMsg")
-  if (resultControlCity === false) {
-    errorMessage.textContent = "Ce champ n'accepte que les caractères alphabétiques dans la limite de 1 à 40"
-    return
+  cityHasError = resultControlCity
+  if (city.value.length > 40) {
+    resultControlCity = "Votre ville contient trop de caractères"
+  } else if (city.value.length < 1) {
+    resultControlCity = "Votre ville n'est pas renseignée"
+  } else if (resultControlCity === false) {
+    errorMessageCity.textContent = "Ce champ n'accepte que les caractères alphabétiques dans la limite de 1 à 40"
+
   } else {
-    errorMessage.textContent = ""
-    return
+    errorMessageCity.textContent = ""
+
   }
-})
+}
 
-
-// Email
-let email = document.getElementById("email")
-
-email.addEventListener("input", function () {
+function checkEmail() {
+  let errorMessageEmail = document.getElementById("emailErrorMsg")
   let regexEmail = /^([a-z\d_\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/
   let resultControlEmail = regexEmail.test(email.value)
-  let errorMessage = document.getElementById("emailErrorMsg")
+  emailHasError = resultControlEmail
   if (resultControlEmail === false) {
-    errorMessage.textContent = "Ce champ doit contenir un '@' et n'accepte que les caractères alphabétiques minuscules et numériques dans la limite de 1 à 40"
-    return
+    errorMessageEmail.textContent = "Ce champ doit contenir un '@' et n'accepte que les caractères alphabétiques minuscules et numériques dans la limite de 1 à 40"
   } else {
-    errorMessage.textContent = ""
-    return
+    errorMessageEmail.textContent = ""
+
   }
+}
+
+
+firstName.addEventListener("input", function () {
+  checkFirstName()
+
 })
+lastName.addEventListener("input", function () {
+  checkLastName()
 
-//-------------------------------------------------
-// Création d'un objet de contact
-//-------------------------------------------------
-
-
-
-/**
- *
- * Expects request to contain:
- * contact: {
- *   firstName: string,
- *   lastName: string,
- *   address: string,
- *   city: string,
- *   email: string
- * }
- * products: [string] <-- array of product _id
- *
- */
+})
+address.addEventListener("input", function () {
+  checkAddress()
+})
+city.addEventListener("input", function () {
+  checkCity()
+})
+email.addEventListener("input", function () {
+  checkEmail()
 
 
-
-// solution plus intéressante
-// products: listObjets.map((objet) =>objet.id)
+})
 
 
 
@@ -350,60 +376,55 @@ email.addEventListener("input", function () {
 // Valider la commande
 //-------------------------------------------------
 
-
 let order = document.getElementById("order")
 
-order.addEventListener("click", function (event) {
+order.addEventListener("click", async function (event) {
+  // changer la réaction du click par défaut
   event.preventDefault()
-  // 1ere etape vérifier que tous les input sont bons
   // si c est ok envoyer le formulaire sinon afficher une alerte
-  let body = {
-    contact: {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      address: address.value,
-      city: city.value,
-      email: email.value,
-    },
+  if (
+    firstNameHasError === true &&
+    lastNameHasError === true &&
+    addressHasError === true &&
+    cityHasError === true &&
+    emailHasError === true
+  ) {
+    let body = {
+      contact: {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        address: address.value,
+        city: city.value,
+        email: email.value,
+      },
 
-    products: listObjets.map(function (objet) {
-      return objet.id
+      products: listObjets.map(function (objet) {
+        return objet.id
+      })
+    }
+    let reponseGet = await fetch("http://localhost:3000/api/products/order", {
+      method: 'POST',
+      headers: {
+        // 'Accept': 'application/json',
+        'content-type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(body)
     })
+    let result = await reponseGet.json();
+    console.log(result);
+    // on envoie
+
+    let orderId = result.orderId
+    document.location = "http://127.0.0.1:5500/P5-Dev-Web-Kanap/front/html/confirmation.html?orderId=" + orderId
+
+  } else {
+    alert("veuillez corriger les erreurs du formulaire")
+
   }
-  console.log(body)
+
+
+
+
+
+
 })
-
-
-
-
-
-// chercher l'élément et le stocker dans une variable
-//
-
-
-
-
-
-
-
-    // ///////////////////////////////////
-    // TABLEAU RENSEIGNEMENTS CLIENTS ///
-    // //////////////////////////////////
-
-    // const arrayClient = []
-    // arrayId.push(document.getElementById("firstName"))
-    // arrayId.push(document.getElementById("lastName"))
-    // arrayId.push(document.getElementById("address"))
-    // arrayId.push(document.getElementById("city"))
-    // arrayId.push(document.getElementById("email"))
-
-
-    //   // console.log(arrayClient)
-
-    //   /////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-    //   // input.addEventListener ("change" , reaction() {
