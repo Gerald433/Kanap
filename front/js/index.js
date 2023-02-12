@@ -14,7 +14,6 @@ async function getProducts() {
         console.error(error)
         return []
     }
-
 }
 
 /**
@@ -55,3 +54,4 @@ let canapes = await getProducts()
 for (let i = 0; i < canapes.length; i++) {
     displayProduct(canapes[i])
 }
+console.log(canapes)
